@@ -1,6 +1,8 @@
 # pyllegro
 ===
-<img src="https://raw.github.com/Behoston/pyllegro/master/misc/logo.png" title="pyllegro logo" />
+<img src="https://raw.github.com/Behoston/pyllegro/master/misc/logo.png"  height="200" width="200" title="pyllegro logo" />
+
+
 <a href="allegro.pl">allegro</a> WEB and REST API for Python
 
 
