@@ -1,0 +1,5 @@
+.idea/
+worksheet.py
+local.ini
+.cache/
+__pycache__/
