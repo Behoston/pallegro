@@ -8,6 +8,8 @@ USERNAME = 'test'
 PASSWORD = 'test'
 
 
+# TODO: write test for all methods and run it when allegro fix sandbox
+
 class TestingAllegroWebApi(unittest.TestCase):
     def test_default_sandbox_environment(self):
         a = AllegroWebApi(API_KEY)
@@ -16,7 +18,7 @@ class TestingAllegroWebApi(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # todo: change config reading
+    # TODO: change config reading
     config = ConfigParser()
     config.read('local.ini')  # test_config.ini file here
     API_KEY = config.get('allegro', 'api-key')
