@@ -165,6 +165,43 @@ class AllegroUser(object):
             request['pageNumber'] = page_number
         return self.api.client.service.doGetMyNotSoldItems(**request)
 
+    def get_not_won_items(self, sort_by=None, sort_order=None,
+                          filter_search=None, filter_category_id=None, filter_item_ids=None,
+                          page_size=None, page_number=None):
+        """
+        :param sort_by: 1 - offer end time (default)        \n
+                        2 - actual price                    \n
+                        3 - offer name                      \n
+                        4 - number of offers                \n
+                        5 - highest offer                   \n
+                        8 - my maximum offer
+        :param sort_order:  1 - ascend                      \n
+                            2 - descend (default)
+        :param filter_search:       search condition in title, you can use * - () ""
+        :param filter_category_id:  only offers from specified category
+        :param filter_item_ids:     only offers for specified items (max 100 items)
+        :param page_size:           amount of returned items (min=1, max=1000, default=1000)
+        :param page_number:         default 0
+        """
+        request = {'sessionId': self.session_id}
+        if sort_order is not None or sort_by is not None:
+            request['sortOptions'] = {}
+            if sort_by is not None:
+                request['sortOptions']['sortType'] = sort_by
+            if sort_order is not None:
+                request['sortOptions']['sortOrder'] = sort_order
+        if filter_search is not None:
+            request['searchValue'] = filter_search
+        if filter_category_id is not None:
+            request['categoryId'] = filter_category_id
+        if filter_item_ids is not None:
+            request['itemIds'] = filter_item_ids
+        if page_size is not None:
+            request['pageSize'] = page_size
+        if page_number is not None:
+            request['pageNumber'] = page_number
+        return self.api.client.service.doGetMyNotWonItems(**request)
+
 
 class SafeAllegroUser(AllegroUser):
     """REST API + WSDL API Allegro User (logged in using OAuth2)"""
