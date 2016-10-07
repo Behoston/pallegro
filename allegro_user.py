@@ -547,6 +547,9 @@ class AllegroUser(object):
         request = {'sessionId': self.session_id, 'itemsIdArray': item_ids}
         return self.api.client.service.doRemoveFromWatchList(**request)
 
+    def get_profile(self):
+    	return self.api.client.service.doGetMyData(sessionHandle=self.session_id)
+
     # ######## END My Allegro section ############
 
 
