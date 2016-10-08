@@ -143,6 +143,13 @@ class AllegroWebApi(object):
             request['userLogin'] = user_login
         return self.client.service.doShowUser(**request)
 
+    def get_user_login(self, user_id):
+        """
+        :param user_id: user identifier
+        """
+        request = {'countryId': self.country_code, 'userId': user_id, 'webapiKey': self.api_key}
+        return self.client.service.doGetUserLogin(**request)
+
     # ###### END USER INFO #######
     #  ##### VERSIONS #####
     def check_status(self):
