@@ -140,3 +140,14 @@ class AllegroWebApi(object):
                 self.ver_key = app['verKey']
                 break
         return version
+
+    # ######## Search and listing     ############
+
+    def get_available_attributes_for_category(self, category_id):
+        """
+        :param category_id: category identifier
+        """
+        request = {'countryId': self.country_code, 'webapiKey': self.api_key, 'catId': category_id}
+        return self.client.service.doGetSellFormAttribs(**request)
+
+    # ####### END Search and listing  ############
