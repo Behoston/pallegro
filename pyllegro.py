@@ -150,4 +150,58 @@ class AllegroWebApi(object):
         request = {'countryId': self.country_code, 'webapiKey': self.api_key, 'catId': category_id}
         return self.client.service.doGetSellFormAttribs(**request)
 
-    # ####### END Search and listing  ############
+    def get_items(self, filter_id=None, filter_value_id=None, filter_value_min=None, filter_value_max=None,
+                  sort_by=None, sort_order=None,
+                  result_size=None, result_offset=None, result_scope=None):
+        """
+        :param filter_id:        filter type
+        :param filter_value_id:  value or values of applied filter
+        :param filter_value_min: used in range filter to set minimum value
+        :param filter_value_max: used in range filter to set maximum value
+        :param sort_by:  endingTime     - time to end offer (default in most listing...)        \n
+                         startingTime   - time form start offer                                 \n
+                         price          - price                                                 \n
+                         priceDelivery  - price with delivery                                   \n
+                         popularity     - popularity (amount of buy offers)                     \n
+                         name           - title                                                 \n
+                         relevance      - relevance
+        :param sort_order:  asc  - ascend (default in most listing...)                          \n
+                            desc - descend
+        :param result_size:     amount of returned data (min=1 max=1000, default=100)
+        :param result_offset:   from which object load data (default=0)
+        :param result_scope:    determine what data should be returned:    \n
+                                 1 - do not return filters                  \n
+                                 2 - do not return category tree            \n
+                                 4 - do not return offers                   \n
+                                 You can accumulate this filter (for example: 3 do not return filters and category tree)
+        """
+        request = {'webapiKey': self.api_key, 'countryId': self.country_code}
+        filter_options = {filter_id, filter_value_id, filter_value_min, filter_value_max}
+        if len(filter_options) > 1 or filter_options.pop() is not None:
+            request['filterOptions'] = {}
+            if filter_id is not None:
+                request['filterOptions']['filterId'] = filter_id
+            if filter_value_id is not None:
+                request['filterOptions']['filterValueId'] = filter_value_id
+            if filter_value_min is not None or filter_value_max is not None:
+                request['filterOptions']['filterValueRange'] = {}
+                if filter_value_min is not None:
+                    request['filterOptions']['filterValueRange']['filterValueMin'] = filter_value_min
+                if filter_value_max is not None:
+                    request['filterOptions']['filterValueRange']['filterValueMax'] = filter_value_max
+
+        if sort_by is not None or sort_order is not None:
+            request['sortOptions'] = {}
+            if sort_by is not None:
+                request['sortOptions']['sortType'] = sort_by
+            if sort_order is not None:
+                request['sortOptions']['sortOrder'] = sort_order
+        if result_size is not None:
+            request['resultSize'] = result_size
+        if result_offset is not None:
+            request['resultOffset'] = result_offset
+        if result_scope is not None:
+            request['resultScope'] = result_scope
+        return self.client.service.doGetItemsList(**request)
+
+# ####### END Search and listing  ############
