@@ -561,6 +561,10 @@ class AllegroUser(object):
                    'userLicCountry': self.api.country_code, 'userLicDate': licence_date}
         return self.api.client.service.doSetUserLicenceDate(**request)
 
+    def get_licence_date(self):
+        request = {'sessionHandle': self.session_id}
+        return self.api.client.service.doGetUserLicenceDate(**request)
+
     # ####### END LICENCE #######
 
 
