@@ -125,10 +125,12 @@ class AllegroWebApi(object):
     def get_user_id(self, user_login):
         return self.client.service.doGetUserID(self.country_code, user_login, webapiKey=self.api_key)
 
+    #  ##### VERSIONS #####
     def check_status(self):
         """Check versions on server """
         # TODO: call this if self.ver_key is None when is needed
-        version = self.client.service.doQueryAllSysStatus(countryId=self.country_code, webapiKey=self.api_key)
+        request = {'countryId': self.country_code, 'webapiKey': self.api_key}
+        version = self.client.service.doQueryAllSysStatus(**request)
         for app in version[0]:
             if app['countryId'] == self.country_code:
                 self.program_version = app['programVersion']
@@ -141,6 +143,15 @@ class AllegroWebApi(object):
                 break
         return version
 
+    def check_component_version(self, component):
+        """
+        :param component:   3 - category tree   \n
+                            4 - sell form
+        """
+        request = {'sysvar': component, 'countryId': self.country_code, 'webapiKey': self.api_key}
+        return self.client.service.doQuerySysStatus(**request)
+
+    # ######## END VERSION  #########
     # ######## Search and listing     ############
 
     def get_available_attributes_for_category(self, category_id):
