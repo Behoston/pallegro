@@ -11,12 +11,12 @@
  - Ułatwienie późniejszej integracji w Django
  
 ## Założenia
- - Niestety nie jest dla mnie w 100% jasne, czy istnieje potrzeba implementacji wszysstkich metod API, jednak ze względu na ich bardzo małą zmienność może to być dobre rozwiązanie.
- - Kod musi być przetestowany
- - Kod musi zawierać prykłady użycia pozwalające na zrozumienie zachowania pyllegro
+ - Wszystkie dostępne metody API powinny zostać zaimplementowane
+ - Kod musi być przetestowany (jak tylko allegro naprawi środowisko deweloperskie)
+ - Kod musi zawierać prykłady użycia pozwalające na zrozumienie zachowania pyllegro (jak tylko allegro naprawi środowisko deweloperskie)
  - Dokumentacja powinna być zawarta w kodzie programu
  - Implementacja powinna zawierać zarówno `webapi` jak i `REST API` i umożliwiać korzystanie z obydwu w dość przezroczysty sposób
- - Wszelkie błędy i niedociągnięcia po stronie API powinny być wyraźnie zaznaczone w miejscu w którym są wykorzystywane
+ - Wszelkie błędy i niedociągnięcia po stronie API powinny być wyraźnie zaznaczone w miejscu w którym problem występuje
 
 ## Jak to działa?
 <img src="https://raw.github.com/Behoston/pyllegro/master/misc/diagram.png" title="diagram" />
