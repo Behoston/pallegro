@@ -1,7 +1,7 @@
 import base64
 import hashlib
 
-from pyllegro import AllegroWebApi
+from pallegro import AllegroWebApi
 
 API_KEY = 'your api key'  # You should download this from your allegro account
 COUNTRY = 'PL'  # Available values = ['PL', 'UA', 'CZ']

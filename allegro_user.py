@@ -636,7 +636,7 @@ class SafeAllegroUser(AllegroUser):
         if not force and not self.need_refresh() or self.refresh_times_left == 0:
             return
         else:
-            # TODO: implement this method https://github.com/Behoston/pyllegro/issues/1
+            # TODO: implement this method https://github.com/Behoston/pallegro/issues/1
             pass
 
-            # TODO: implement first REST API 'default' method https://github.com/Behoston/pyllegro/issues/2
+            # TODO: implement first REST API 'default' method https://github.com/Behoston/pallegro/issues/2

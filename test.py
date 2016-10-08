@@ -1,7 +1,7 @@
 import unittest
 from configparser import ConfigParser
 
-from pyllegro import AllegroWebApi
+from pallegro import AllegroWebApi
 
 API_KEY = 'test'
 USERNAME = 'test'
