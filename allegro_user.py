@@ -573,6 +573,38 @@ class AllegroUser(object):
         return self.api.client.service.doGetAdminUserLicenceDate(**request)
 
     # ####### END LICENCE #######
+    # ####### BUY ###############
+    def buy_or_bid(self, offer_id, price, amount, buy_now=None, variant_id=None,
+                   pharmacy_first_name=None, pharmacy_last_name=None, pharmacy_address=None, pharmacy_post_code=None,
+                   pharmacy_city=None):
+        """
+        :param offer_id: offer ID
+        :param price:    max bid price or "buy now" price if buying now
+        :param amount:   how many items
+        :param buy_now:  required if buy now is enabled             \n
+                         0/False - not buy now, use bids (default)        \n
+                         1/True  - buy now, not use bids
+        :param variant_id:           if offer have variants, required.
+        :param pharmacy_first_name:  required if buying drugs, first name
+        :param pharmacy_last_name:   required if buying drugs, last name
+        :param pharmacy_address:     required if buying drugs, address
+        :param pharmacy_post_code:   required if buying drugs, postal code
+        :param pharmacy_city:        required if buying drugs, city
+        """
+        request = {'adminSessionHandle': self.session_id, 'bidItId': offer_id, 'bidUserPrice': price,
+                   'bidQuantity': amount}
+        if buy_now is not None:
+            request['bidBuyNow'] = int(buy_now)
+        if variant_id is not None:
+            request['variantId'] = variant_id
+        if pharmacy_first_name is not None:
+            pharmacy = {'recipientFirstName': pharmacy_first_name, 'recipientLastName': pharmacy_last_name,
+                        'recipientAddress': pharmacy_address, 'recipientPostcode': pharmacy_post_code,
+                        'recipientCity': pharmacy_city}
+            request['pharmacyRecipientData'] = pharmacy
+        return self.api.client.service.doBidItem(**request)
+
+        # ####### END BUY ###########
 
 
 class SafeAllegroUser(AllegroUser):
