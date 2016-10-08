@@ -551,6 +551,17 @@ class AllegroUser(object):
         return self.api.client.service.doGetMyData(**request)
 
     # ######## END My Allegro section ############
+    # ####### LICENCE #######
+    def give_licence_to_user(self, user_login, licence_date):
+        """
+        :param user_login:   user to give licence
+        :param licence_date: date in timestamp format
+        """
+        request = {'adminSessionHandle': self.session_id, 'userLicLogin': user_login,
+                   'userLicCountry': self.api.country_code, 'userLicDate': licence_date}
+        return self.api.client.service.doSetUserLicenceDate(**request)
+
+    # ####### END LICENCE #######
 
 
 class SafeAllegroUser(AllegroUser):
