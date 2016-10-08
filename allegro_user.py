@@ -565,6 +565,13 @@ class AllegroUser(object):
         request = {'sessionHandle': self.session_id}
         return self.api.client.service.doGetUserLicenceDate(**request)
 
+    def get_granted_licence_date(self, user_login):
+        """
+        :param user_login: user to check licence date you grated
+        """
+        request = {'adminSessionHandle': self.session_id, 'userLicLogin': user_login}
+        return self.api.client.service.doGetAdminUserLicenceDate(**request)
+
     # ####### END LICENCE #######
 
 
