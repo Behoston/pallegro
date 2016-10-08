@@ -16,7 +16,6 @@ class AllegroUser(object):
 
     # ######## My Allegro section ############
 
-
     def get_favourite_categories(self):
         return self.api.client.service.doGetFavouriteCategories(sessionHandle=self.session_id)
 
@@ -548,7 +547,8 @@ class AllegroUser(object):
         return self.api.client.service.doRemoveFromWatchList(**request)
 
     def get_profile(self):
-        return self.api.client.service.doGetMyData(sessionHandle=self.session_id)
+        request = {'sessionHandle': self.session_id}
+        return self.api.client.service.doGetMyData(**request)
 
     # ######## END My Allegro section ############
 

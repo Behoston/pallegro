@@ -122,9 +122,28 @@ class AllegroWebApi(object):
         expires_in = response_json['expires_in']
         return SafeAllegroUser(self, user_id, session_id, start_time, access_token, refresh_token, expires_in)
 
-    def get_user_id(self, user_login):
-        return self.client.service.doGetUserID(self.country_code, user_login, webapiKey=self.api_key)
+    # ###### USER INFO #######
 
+    def get_user_id(self, user_login):
+        """
+        :param user_login: nickname or email
+        """
+        request = {'countryId': self.country_code, 'userLogin': user_login, 'webapiKey': self.api_key}
+        return self.client.service.doGetUserID(**request)
+
+    def get_user_public_data(self, user_id=None, user_login=None):
+        """
+        :param user_id:     required if not using user_login (primary)
+        :param user_login:  required if not using user_id (probably work with nickname and email)
+        """
+        request = {'countryId': self.country_code, 'webapiKey': self.api_key}
+        if user_id is not None:
+            request['userId'] = user_id
+        if user_login is not None:
+            request['userLogin'] = user_login
+        return self.client.service.doShowUser(**request)
+
+    # ###### END USER INFO #######
     #  ##### VERSIONS #####
     def check_status(self):
         """Check versions on server """
