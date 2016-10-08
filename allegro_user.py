@@ -604,7 +604,15 @@ class AllegroUser(object):
             request['pharmacyRecipientData'] = pharmacy
         return self.api.client.service.doBidItem(**request)
 
-        # ####### END BUY ###########
+    def request_cancel_buy_offer(self, offer_id, reason):
+        """
+        :param offer_id:    offer ID
+        :param reason:      reason why you want to cancel buy/bid
+        """
+        request = {'adminSessionHandle': self.session_id, 'requestItemId': offer_id, 'requestCancelReason': reason}
+        return self.api.client.service.doRequestCancelBid(**request)
+
+    # ####### END BUY ###########
 
 
 class SafeAllegroUser(AllegroUser):
